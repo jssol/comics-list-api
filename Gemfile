@@ -37,8 +37,8 @@ gem 'bootsnap', require: false
 gem 'rack-cors'
 
 # Use gems for API authentication
-gem 'rest-client'
 gem 'dotenv-rails'
+gem 'rest-client'
 
 # Use Rubocop for linters
 gem 'rubocop', '>= 1.0', '< 2.0'
