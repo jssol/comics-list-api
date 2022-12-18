@@ -30,3 +30,6 @@
 
 # Ignore .gitignore
 node_modules/
+
+# Ignore API keys
+.env
