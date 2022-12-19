@@ -40,6 +40,9 @@ gem 'rack-cors'
 gem 'dotenv-rails'
 gem 'rest-client'
 
+# Use digest for API keys encryption
+gem 'digest'
+
 # Use Rubocop for linters
 gem 'rubocop', '>= 1.0', '< 2.0'
 
