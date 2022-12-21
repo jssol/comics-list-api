@@ -1,5 +1,5 @@
 class ComicsController < ApplicationController
-  before_action :set_comic, only: %i[ show update destroy ]
+  before_action :set_comic, only: %i[show update destroy]
 
   # GET /comics
   def index
@@ -39,13 +39,14 @@ class ComicsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_comic
-      @comic = Comic.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def comic_params
-      params.fetch(:comic, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_comic
+    @comic = Comic.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def comic_params
+    params.fetch(:comic, {})
+  end
 end

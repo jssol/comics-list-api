@@ -1,13 +1,13 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[ show update destroy ]
+  before_action :set_event, only: %i[show update destroy]
 
   # GET /events
   def index
-    url = get_url("/events")
+    url = get_url('/events')
     print url
-    @response = RestClient.get(url, {content_type: :json, accept: :json})
+    @response = RestClient.get(url, { content_type: :json, accept: :json })
 
-    @events = JSON.parse(@response.body)["data"]["results"]
+    @events = JSON.parse(@response.body)['data']['results']
 
     if @events
       render json: @events
@@ -47,13 +47,14 @@ class EventsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def event_params
-      params.fetch(:event, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def event_params
+    params.fetch(:event, {})
+  end
 end
