@@ -3,9 +3,17 @@ class EventsController < ApplicationController
 
   # GET /events
   def index
-    @events = Event.all
+    url = get_url("/events")
+    print url
+    @response = RestClient.get(url, {content_type: :json, accept: :json})
 
-    render json: @events
+    @events = JSON.parse(@response.body)["data"]["results"]
+
+    if @events
+      render json: @events
+    else
+      render json: { error: 'Not found' }, status: :error
+    end
   end
 
   # GET /events/1
