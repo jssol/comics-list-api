@@ -3,7 +3,7 @@ require 'digest'
 Dotenv.load
 
 def get_url(endpoint)
-  base_url = 'https://gateway.marvel.com/v1/public'
+  base_url = 'https://gateway.marvel.com'
   public_key = ENV.fetch('MARVEL_PUBLIC_KEY', nil)
   private_key = ENV.fetch('MARVEL_PRIVATE_KEY', nil)
   md5 = Digest::MD5.new
