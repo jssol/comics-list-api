@@ -1,13 +1,12 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[show update destroy]
+  before_action :set_event, only: %i[update]
 
   # GET /events
   def index
     url = get_url('/events')
-    print url
-    @response = RestClient.get(url, { content_type: :json, accept: :json })
+    response = RestClient.get(url, { content_type: :json, accept: :json })
 
-    @events = JSON.parse(@response.body)['data']['results']
+    @events = JSON.parse(response.body)['data']['results']
 
     if @events
       render json: @events
@@ -16,34 +15,27 @@ class EventsController < ApplicationController
     end
   end
 
-  # GET /events/1
+  # GET /events/:id
   def show
-    render json: @event
-  end
+    url = get_url("/events/#{params[:id]}")
+    response = RestClient.get(url, { content_type: :json, accept: :json })
 
-  # POST /events
-  def create
-    @event = Event.new(event_params)
+    @event = JSON.parse(response.body)['data']['results'][0]
 
-    if @event.save
-      render json: @event, status: :created, location: @event
+    if @event
+      render json: @event
     else
-      render json: @event.errors, status: :unprocessable_entity
+      render json: { error: 'Not found' }, status: :error
     end
   end
 
-  # PATCH/PUT /events/1
+  # PATCH/PUT /events/:id
   def update
     if @event.update(event_params)
       render json: @event
     else
       render json: @event.errors, status: :unprocessable_entity
     end
-  end
-
-  # DELETE /events/1
-  def destroy
-    @event.destroy
   end
 
   private
@@ -55,6 +47,6 @@ class EventsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def event_params
-    params.fetch(:event, {})
+    params.require(:event).permit(:id, :title, :description, :thumbnail, :favorite)
   end
 end
