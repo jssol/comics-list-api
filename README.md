@@ -1,24 +1,49 @@
-# README
+# Comics List API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- An API only app built with Rails for the comics-list-webapp. This API should be able to manage users, and save their favorites comics, shows, series, etc...
 
-Things you may want to cover:
+***[Link to FrontEnd App](https://github.com/jssol/comics-list-webapp)***
 
-* Ruby version
+## Built With 🛠️
 
-* System dependencies
+- [x] [ReactJs](https://reactjs.org/)
+- [x] [Ruby on Rails](https://rubyonrails.org/)
+- [x] [PostgresSQL](https://www.postgresql.org/)
 
-* Configuration
+## Usage
 
-* Database creation
+Run the following commands:</br>
+`git clone git@github.com:jssol/comics-list-api.git`</br>
+`cd comics-list-api`</br>
+`bundle install`</br>
+`rails db:create`</br>
+`rails db:migrate`</br>
+`rails s`</br>
+Open a browser and go to: `https://localhost:3001` to view the backend app.
 
-* Database initialization
+## Testing
 
-* How to run the test suite
+`cd BookRacers`</br>
+run `rspec`
 
-* Services (job queues, cache servers, search engines, etc.)
+## Authors
 
-* Deployment instructions
+👤 **Jonathan Sivahera**
 
-* ...
+- GitHub: [@jssol](https://github.com/jssol)
+- Twitter: [@jsivahera](https://twitter.com/jsivahera)
+- LinkedIn: [jsivahera](https://www.linkedin.com/in/jsivahera/)
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](https://github.com/jssol/comics-list-webapp/issues) and
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## 📝 License
+
+This project is [MIT](./MIT.md) licensed.
