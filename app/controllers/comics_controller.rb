@@ -1,41 +1,41 @@
 class ComicsController < ApplicationController
-  before_action :set_comic, only: %i[show update destroy]
+  before_action :set_comic, only: %i[update]
 
   # GET /comics
   def index
-    @comics = Comic.all
+    url = get_url('/comics')
+    response = RestClient.get(url, { content_type: :json, accept: :json })
 
-    render json: @comics
-  end
+    @comics = JSON.parse(response.body)['data']['results']
 
-  # GET /comics/1
-  def show
-    render json: @comic
-  end
-
-  # POST /comics
-  def create
-    @comic = Comic.new(comic_params)
-
-    if @comic.save
-      render json: @comic, status: :created, location: @comic
+    if @comics
+      render json: @comics
     else
-      render json: @comic.errors, status: :unprocessable_entity
+      render json: { error: 'Not found' }, status: :error
     end
   end
 
-  # PATCH/PUT /comics/1
+  # GET /comics/:id
+  def show
+    url = get_url("/comics/#{params[:id]}")
+    response = RestClient.get(url, { content_type: :json, accept: :json })
+
+    @comic = JSON.parse(response.body)['data']['results'][0]
+
+    if @comic
+      render json: @comic
+    else
+      render json: { error: 'Not found' }, status: :error
+    end
+  end
+
+  # PATCH/PUT /comics/:id
   def update
     if @comic.update(comic_params)
       render json: @comic
     else
       render json: @comic.errors, status: :unprocessable_entity
     end
-  end
-
-  # DELETE /comics/1
-  def destroy
-    @comic.destroy
   end
 
   private
@@ -47,6 +47,6 @@ class ComicsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def comic_params
-    params.fetch(:comic, {})
+    params.require(:comic).permit(:id, :title, :description, :thumbnail, :favorite)
   end
 end
