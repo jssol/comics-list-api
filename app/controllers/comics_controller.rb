@@ -38,6 +38,23 @@ class ComicsController < ApplicationController
     end
   end
 
+  def search
+    query = search_params[:query]
+    url = get_search_url('comics', "title=#{query}")
+
+    print url
+
+    response = RestClient.get(url, { content_type: :json, accept: :json })
+
+    @comics = JSON.parse(response.body)['data']['results']
+
+    if @comics
+      render json: @comics
+    else
+      render json: { error: 'Not found' }, status: :error
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -48,5 +65,9 @@ class ComicsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def comic_params
     params.require(:comic).permit(:id, :title, :description, :thumbnail, :favorite)
+  end
+
+  def search_params
+    params.permit(:query)
   end
 end
