@@ -49,6 +49,9 @@ gem 'rubocop', '>= 1.0', '< 2.0'
 # User Rspec for testing
 gem 'rspec-rails', '~> 4.0'
 
+# User Capybara for integration testing
+gem 'capybara', '>= 3.26'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
