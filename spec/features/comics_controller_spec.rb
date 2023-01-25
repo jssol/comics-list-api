@@ -6,7 +6,7 @@ RSpec.feature 'ComicsControllers', type: :feature do
       visit '/comics'
     end
     it 'returns a list of comics' do
-      expect(page).to have_content('data')
+      expect(page).to have_content('id')
     end
     it 'returns status 200' do
       expect(page.status_code).to eq 200
@@ -14,18 +14,18 @@ RSpec.feature 'ComicsControllers', type: :feature do
   end
   describe 'GET /comics/:id' do
     before do
-      visit '/comics/1'
+      visit '/comics/39'
     end
     it 'returns a specific comic' do
-      expect(page).to have_content('data')
+      expect(page).to have_content('id')
     end
     it 'returns status 200' do
       expect(page.status_code).to eq 200
     end
   end
-  describe 'GET /comics/search?query=title' do
+  describe 'GET /comics/search?query=hulk' do
     before do
-      visit '/comics/search?query=title'
+      visit '/search?query=hulk'
     end
     it 'returns status 200' do
       expect(page.status_code).to eq 200
