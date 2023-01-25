@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV["MY_APP_DATABASE_URL"] %>
   database: comics_list_api_production
   username: comics_list_api
   password: <%= ENV["COMICS_LIST_API_DATABASE_PASSWORD"] %>
