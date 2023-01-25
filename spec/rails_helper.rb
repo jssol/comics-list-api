@@ -1,7 +1,7 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 require 'capybara/rspec'
-require_relative 'url_helper_methods'
+require './url_helper_methods'
 
 Capybara.javascript_driver = :selenium_chrome
 Capybara.app_host = 'http://localhost:3001'
