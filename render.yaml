@@ -10,7 +10,7 @@ services:
     name: comics_list_api
     env: ruby
     buildCommand: "./bin/render-build.sh"
-    startCommand: "bundle exec rails s"
+    startCommand: "bundle exec puma -C config/puma.rb"
     plan: free
     envVars:
       - key: DATABASE_URL
