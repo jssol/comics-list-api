@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_many :comics, dependent: :destroy
 
   validates :username, presence: true, uniqueness: true
-  validates :email, presence: true, uniqueness: true, { format: { with: URI::MailTo::EMAIL_REGEXP }, message: "This email already exists" }
+  validates :email, presence: true, uniqueness: { message: 'This email is already in use' }
   validates :first_name, presence: true
   validates :last_name, presence: true
 end
