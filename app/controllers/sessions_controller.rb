@@ -1,26 +1,27 @@
 class SessionsController < ApplicationController
   def create
-    user = User.find_by_email(session_params[:email])
+    user = User.find_by_email(user_params[:email])
 
-    if user&.authenticate(session_params[:password])
+    if user&.authenticate(user_params[:password])
       token = issue_token(user)
-      render json: { user: UserSerializer.new(user).serializable_hash.to_json, jwt: token }
+      render json: { user:, jwt: token, status: :success }
     else
-      render json: { error: 'Incorrect username or password.' }
+      render json: { error: 'Incorrect username or password.', status: :failed }
     end
   end
 
+  # GET /users/1
   def show
     if logged_in?
-      render json: current_user
+      render json: { user: current_user, status: :success }
     else
-      render json: { error: 'User is not logged in/could not be found.' }
+      render json: { error: 'Please log in', status: :failed }
     end
   end
 
   private
 
-  def session_params
-    params.require(:session).permit(:email, :password)
+  def user_params
+    params.require(:user).permit(:email, :password)
   end
 end
