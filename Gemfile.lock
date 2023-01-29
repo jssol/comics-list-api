@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: 3088c5a9c6ca44cc232b249df95bf3b81607cc35
+  branch: main
+  specs:
+    faker (3.1.0)
+      i18n (>= 1.8.11, < 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -100,8 +108,6 @@ GEM
       dotenv (= 2.8.1)
       railties (>= 3.2)
     erubi (1.11.0)
-    faker (3.1.0)
-      i18n (>= 1.8.11, < 2)
     globalid (1.0.0)
       activesupport (>= 5.0)
     http-accept (1.7.0)
@@ -253,7 +259,7 @@ DEPENDENCIES
   debug
   digest
   dotenv-rails
-  faker
+  faker!
   jsonapi-serializer
   jwt
   pg (~> 1.1)
