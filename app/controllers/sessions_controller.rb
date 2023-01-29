@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
     if user&.authenticate(session_params[:password])
       token = issue_token(user)
-      render json: { user: UserSerializer.new(user), jwt: token }
+      render json: { user: UserSerializer.new(user).serializable_hash.to_json, jwt: token }
     else
       render json: { error: 'Incorrect username or password.' }
     end

@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
     if user.save
       token = issue_token(user)
-      render json: { user: UserSerializer.new(user), jwt: token }
+      render json: { user: UserSerializer.new(user).serializable_hash.to_json, jwt: token }
     elsif user.errors.messages
       render json: { error: user.errors.messages }
     else
