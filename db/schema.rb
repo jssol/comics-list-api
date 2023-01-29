@@ -10,14 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_29_155200) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_29_155714) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "comics", force: :cascade do |t|
-    t.boolean "favorite"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.text "description"
+    t.integer "reads_count"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_comics_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -47,6 +51,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_29_155200) do
     t.index ["last_name"], name: "index_users_on_last_name"
   end
 
+  add_foreign_key "comics", "users"
   add_foreign_key "events", "comics"
   add_foreign_key "events", "users"
 end
