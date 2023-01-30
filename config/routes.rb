@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :events
   resources :comics
   post "/signup", to: "users#create"
-  get "/delete-account", to: "users#destroy"
+  post "/delete-account", to: "users#destroy"
   post "/login", to: "sessions#create"
   get "/profile", to: "sessions#show"
 
