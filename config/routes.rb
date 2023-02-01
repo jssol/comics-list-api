@@ -5,11 +5,11 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :events
   resources :comics
-  
+
   post "/signup", to: "users#create"
   post "/delete-account", to: "users#destroy"
   post "/login", to: "sessions#create"
+  post "/authorized", to: "sessions#show"
 
-  get "/authorized", to: "sessions#show"
-  get '/search', to: 'comics#search'
+  get "/search", to: "comics#search"
 end
