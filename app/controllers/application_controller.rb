@@ -1,4 +1,7 @@
+require_relative 'url_helper_methods'
+
 class ApplicationController < ActionController::API
+  include UrlHelperMethods
   def jwt_key
     Rails.application.credentials.jwt_key
   end
@@ -14,15 +17,15 @@ class ApplicationController < ActionController::API
   end
 
   def token
-    request.headers['Authorization']
+    request.headers['Authorization'][7..-1]
   end
 
   def user_id
-    decoded_token.first['user_id']
+    decoded_token[0]['user_id']
   end
 
   def current_user
-    User.find_by(id: user_id)
+    User.find(user_id)
   end
 
   def logged_in?
